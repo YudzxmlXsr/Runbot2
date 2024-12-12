@@ -1,0 +1,39 @@
+name: Git Clone, Unzip, Install, and Run
+
+on:
+  push:
+    branches:
+      - main  # Jalankan setiap ada push di branch 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Clone the target repository
+    - name: Clone runbot2 repository
+      run: |
+        git clone https://github.com/YudzxmlXsr/runbot2.git
+
+    # Step 2: Navigate into the runbot2 directory
+    - name: Change directory to runbot2
+      run: cd runbot2
+
+    # Step 3: Unzip x7botz.zip file inside the runbot2 folder
+    - name: Unzip x7botz.zip
+      run: |
+        sudo apt-get install unzip  # Install unzip tool if not already installed
+        unzip runbot2/x7botz.zip -d ./runbot2 # Unzip x7botz.zip in the runbot2 directory
+
+    # Step 4: Install npm dependencies
+    - name: Install npm dependencies
+      run: |
+        cd runbot2
+        npm install
+
+    # Step 5: Start the npm application
+    - name: Start the application
+      run: |
+        cd runbot2
+        npm start
+        
